@@ -8,9 +8,6 @@
       @mouseout="handlePageMouseOut"
       @dragenter.prevent
       @dragover.prevent
-      @drop="handlePageDrop"
-      @paste="handleGlobalPasteEvent"
-      @keyup.shift.s="onPlaylistShuffle"
       @keyup.left="playlistPrevious"
       @keyup.right="playlistNext"
       @keyup.esc="handleShowPlaying"
@@ -18,7 +15,6 @@
       @keyup.50="handleUpcomingSelected(2)"
       @keyup.51="handleUpcomingSelected(3)"
       @keyup.80="handleShowPlaylist"
-      @keyup.shift.191="handleShowHelp"
     />
 
     <AppHeader
