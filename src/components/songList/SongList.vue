@@ -99,7 +99,7 @@ export default {
                 '[FREE] Melodic Guitar Type Beat 2021 - "Wild Wild West" (prod. Shinazki)', '[FREE] Melodic Guitar Type Beat 2021 - "Riot" (prod. Shinazki)', '[FREE] Phonky Type Beat 2021 - "DK" (prod. Shinazki)',
                 '[FREE] Twenty One Pilots Type Beat 2021 - "Voices" (prod. Shinazki)', '[FREE] Twenty One Pilots Type Beat 2021 - "Adored" (prod. Shinazki)', 'shinazki - Despicable', '[FREE] Drum & Bass Type Beat 2021 - "Blur" (prod. Shinazki)',
                 '[FREE] Synthwave Type Beat 2021 - "Neotokyo" (prod. Shinazki)', '[FREE] EDM Trap Type Beat 2021 - "Under The Hoodie" (prod. Shinazki)', '[FREE] EDM House Type Beat 2021 - "Focus" (prod. Shinazki)', 'shinazki - dog days',
-                '[FREE] Orchestral Jungle Type Beat 2021 - "Doomsday" (prod. Shinazki)', '[FREE] Chill Lofi Type Beat 2021 - "Dawn" (prod. Shinazki)'],
+                '[FREE] Orchestral Jungle Type Beat 2021 - "Doomsday" (prod. Shinazki)', '[FREE] Chill Lofi Type Beat 2021 - "Dawn" (prod. Shinazki)', "gumball but it's lofi and kind of sad"],
       songInfo: {},
       loading: false,
       playlistCopy: [],
@@ -111,6 +111,7 @@ export default {
       return this.playlistCopy.length;
     },
   },
+
 
   methods: {
     async fetchSongInfo() {

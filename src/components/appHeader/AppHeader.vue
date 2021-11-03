@@ -85,7 +85,7 @@ export default {
                   "https://www.youtube.com/watch?v=jzFoQ3A5ZSo", "https://www.youtube.com/watch?v=xvtsJ0p1sAw", "https://www.youtube.com/watch?v=0muqYE4cQ0M", "https://www.youtube.com/watch?v=K0lHElbTJmY",
                   "https://www.youtube.com/watch?v=IAcm38nX99k", "https://www.youtube.com/watch?v=LuBO1gy_SAA", "https://www.youtube.com/watch?v=REf6R1dMxRg", "https://www.youtube.com/watch?v=jBK6hfw5ZFo",
                   "https://www.youtube.com/watch?v=r0gpbaweX3s", "https://www.youtube.com/watch?v=p-LVm5PmMBA", "https://www.youtube.com/watch?v=isHhcI0czpM", "https://www.youtube.com/watch?v=nnCE88AMg6Y",
-                  "https://www.youtube.com/watch?v=Nv4LnWlKptQ"]
+                  "https://www.youtube.com/watch?v=Nv4LnWlKptQ", "https://www.youtube.com/watch?v=ug_LfJoUkiU"]
     
     urls.map(element => {
       getYtUrls(element);
