@@ -47,7 +47,7 @@
       </div>
 
       <div :class="css.playlistControlSection">
-        <button @click="$emit('remove')">
+        <button style="visibility: hidden;" @click="$emit('remove')">
           <unicon width="35" height="35" name="trash" fill="#4a635d" />
         </button>
       </div>
