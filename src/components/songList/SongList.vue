@@ -16,7 +16,7 @@
         <span v-else>loading videos...</span>
       </h3>
       <div v-if="songNumber" :class="css.playlistControls">
-        <button @click="$emit('shuffle')">
+        <button style="visibility: hidden;" @click="$emit('shuffle')">
           <unicon width="26" height="26" name="shuffle" fill="#4a635d" />
         </button>
         <button style="visibility: hidden;" @click="$emit('clearPlaylist')">
