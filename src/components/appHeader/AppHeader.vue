@@ -10,6 +10,28 @@
       >
         Playlist
       </button>
+      <button>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/shinazki/">
+          <unicon width="28" height="28" name="instagram" fill="#fff" />
+        </a>
+      </button>
+  
+      <button>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UCviaWfMfmM2nPskGQJ13g0A/videos">
+          <unicon width="28" height="28" name="youtube" fill="#fff" />
+        </a>
+      </button>
+      <button>
+        <a target="_blank" rel="noopener noreferrer" href="https://soundcloud.com/shinazki">
+          <img :src="img.soundcloud" alt="soundcloud" />
+        </a>
+      </button>
+      <button>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.beatstars.com/shinazki">
+          <img :src="img.beatstars" alt="beatstars" />
+        </a>
+        
+      </button>
       <input
         v-model="manualUrlInput"
         autofocus
@@ -34,6 +56,8 @@
 <script>
 import css from "./AppHeader.module.css";
 import pilot from "@/assets/pilot.svg";
+import beatstars from "@/assets/beatstars.svg";
+import soundcloud from "@/assets/soundcloud.svg";
 import { getYtVideoId, getYtUrls } from "@/utils/string";
 
 export default {
@@ -48,6 +72,8 @@ export default {
       manualUrlInput: "",
       css,
       img: {
+        soundcloud,
+        beatstars,
         pilot,
       },
     };

@@ -3,6 +3,8 @@ import App from "./App.vue";
 import NotificationPlugin from "vue-notification";
 import Unicon from "vue-unicons";
 import {
+  uniYoutube,
+  uniInstagram,
   uniPlay,
   uniPause,
   uniMusic,
@@ -28,6 +30,8 @@ Vue.use(LocalstoragePlugin);
 Vue.use(NotificationPlugin);
 
 Unicon.add([
+  uniYoutube,
+  uniInstagram,
   uniPlay,
   uniPause,
   uniMusic,
