@@ -57,7 +57,7 @@
           <span v-if="songInfo[song.videoId]" :class="css.songTitle">
             {{ createTextElipsis(songInfo[song.videoId].title) }}
           </span>
-          <span v-else :class="css.songTitle">{{ song.videoId }}</span>
+          <span v-else :class="css.songTitle">{{ songName[i] }}</span>
         </li>
       </draggable>
     </div>
@@ -92,6 +92,14 @@ export default {
   data() {
     return {
       css,
+      songName: ['[FREE] Hard/Dark Type Beat 2021 - "Session" (prod. Shinazki)', '[FREE] Boom Bap Type Beat 2021 - "Wisdom" (prod. Shinazki)', '[FREE] Melancholic Type Beat 2021 - "Empty" (prod. Shinazki)',
+                '[FREE] Melodic Type Beat 2021 - "Neverland" (prod. Shinazki)', '[FREE] Melodic Mood Type Beat 2021 - "Strangers" (prod. Shinazki)', '[FREE] Melancholic Type Beat 2021 - "Happy Thoughts" (prod. Shinazki)',
+                '[FREE] Melodic Retro Type Beat 2021 - "Golden" (prod. Shinazki)', '[FREE] Boom Bap Melodic Type Beat 2021 - "K7DAGLH" (prod. Shinazki)', '[FREE] Chill Melodic Type Beat 2021 - "Dusk" (prod. Shinazki)',
+                '[FREE] Brazilian Funk Type Beat 2021 - "Big Prom" (prod. Shinazki)', '[free] chill hop lofi type beat 2021 - "daydream" (prod. shinazki)', '[FREE] Hyperpop x EDM x Trap Type Beat 2021 - "XXXXXX" (prod. Shinazki)',
+                '[FREE] Melodic Guitar Type Beat 2021 - "Wild Wild West" (prod. Shinazki)', '[FREE] Melodic Guitar Type Beat 2021 - "Riot" (prod. Shinazki)', '[FREE] Phonky Type Beat 2021 - "DK" (prod. Shinazki)',
+                '[FREE] Twenty One Pilots Type Beat 2021 - "Voices" (prod. Shinazki)', '[FREE] Twenty One Pilots Type Beat 2021 - "Adored" (prod. Shinazki)', 'shinazki - Despicable', '[FREE] Drum & Bass Type Beat 2021 - "Blur" (prod. Shinazki)',
+                '[FREE] Synthwave Type Beat 2021 - "Neotokyo" (prod. Shinazki)', '[FREE] EDM Trap Type Beat 2021 - "Under The Hoodie" (prod. Shinazki)', '[FREE] EDM House Type Beat 2021 - "Focus" (prod. Shinazki)', 'shinazki - dog days',
+                '[FREE] Orchestral Jungle Type Beat 2021 - "Doomsday" (prod. Shinazki)', '[FREE] Chill Lofi Type Beat 2021 - "Dawn" (prod. Shinazki)'],
       songInfo: {},
       loading: false,
       playlistCopy: [],
