@@ -66,7 +66,6 @@ export default {
     });
       const videoIds = urls.map(getYtVideoId);
     if (videoIds.length) {
-      console.log(videoIds)
       this.$emit("addYtUrls", videoIds);
       this.manualUrlInput = "";
     }
