@@ -3,7 +3,9 @@ name: CI build
 on: 
   schedule:
     - cron: '0 12 * * *'  # this will be triggered on 12pm (UTC) each day 
-
+  push:
+    branches:
+      - main
 
 jobs:
   build:
