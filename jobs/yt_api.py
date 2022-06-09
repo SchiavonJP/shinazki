@@ -1,5 +1,6 @@
 # from Google import Create_Service
 import json
+import os
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
@@ -13,6 +14,10 @@ from dynaconf import Dynaconf
 
 settings = Dynaconf(settings_files=["./settings.toml", ".secrets.toml"])
 pyproject = Dynaconf(settings_files=["./pyproject.toml"])
+settings.client_id = os.environ["CLIENT_ID"]
+settings.client_secret = os.environ["CLIENT_SECRET"]
+settings.project_id = os.environ["PROJECT_ID"]
+settings.postgres_password = os.environ["POSTGRES_PASSWORD"]
 
 
 class Music(BaseModel):
@@ -105,10 +110,10 @@ class Youtube:
     def connect_postgres(self, list_videos):
         try:
             conn = psycopg2.connect(
-                host="ec2-52-72-99-110.compute-1.amazonaws.com",
-                database="d9acfdtjfv6fag",
-                user="vcudzeyhaesnwk",
-                password="4a27d81c8a1a5907b9a2b5996d4a94ce4f6265bcdc2ce1759040c259d332a11f",
+                host=settings.postgres_host,
+                database=settings.postgres_dbname,
+                user=settings.postrgres_user,
+                password=settings.postgres_password,
             )
             return conn
         except (Exception, psycopg2.DatabaseError) as error:

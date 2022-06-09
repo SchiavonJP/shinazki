@@ -5,3 +5,7 @@ redirect_uris = 'http://localhost:8080/'
 javascript_origins = 'http://localhost:8080'
 scope = 'https://www.googleapis.com/auth/youtube'
 channel_id = 'UCviaWfMfmM2nPskGQJ13g0A'
+postgres_host = 'ec2-52-72-99-110.compute-1.amazonaws.com'
+postgres_port = 5432
+postgres_user = 'vcudzeyhaesnwk'
+postgres_dbname = 'd9acfdtjfv6fag'
