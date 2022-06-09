@@ -1,5 +1,5 @@
 # from Google import Create_Service
-
+import json
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
@@ -8,6 +8,12 @@ from oauth2client.tools import argparser, run_flow
 from pydantic import BaseModel
 import psycopg2
 
+# Separar em um arquivo de configuração
+from dynaconf import Dynaconf
+
+settings = Dynaconf(settings_files=["./settings.toml", ".secrets.toml"])
+pyproject = Dynaconf(settings_files=["./pyproject.toml"])
+
 
 class Music(BaseModel):
     name: str
@@ -15,15 +21,29 @@ class Music(BaseModel):
 
 
 class Youtube:
-    def __init__(self, client_secrete_file, api_name, api_version):
-        self.client_secrete_file = client_secrete_file
+    def __init__(self, api_name, api_version):
         self.api_name = api_name
         self.api_version = api_version
 
     def get_authenticated_service(self):
+        # Sim isso é uma gambiarra, mas é o que eu consegui fazer
+        c = {
+            "web": {
+                "client_id": settings.client_id,
+                "project_id": settings.project_id,
+                "auth_uri": settings.auth_uri,
+                "token_uri": settings.token_uri,
+                "auth_provider_x509_cert_url": settings.auth_provider_x509_cert_url,
+                "client_secret": settings.client_secret,
+                "redirect_uris": [settings.redirect_uris],
+                "javascript_origins": [settings.javascript_origins],
+            }
+        }
+        with open("aux.json", "w") as fp:
+            json.dump(c, fp)
         flow = flow_from_clientsecrets(
-            self.client_secrete_file,
-            scope=["https://www.googleapis.com/auth/youtube"],
+            "aux.json",
+            scope=[settings.scope],
             message="Error loading client secret file: %s",
         )
 
@@ -115,11 +135,8 @@ class Youtube:
 
 if __name__ == "__main__":
     youtube = Youtube(
-        client_secrete_file="/home/joao/Development/shinazki/y2pilot/jobs/client_secret.json",
         api_name="youtube",
         api_version="v3",
     )
-    channel_id = "UCviaWfMfmM2nPskGQJ13g0A"
+    channel_id = settings.channel_id
     response = youtube.get_channel_detatils(channel_id)
-    # print(response)
-    # print(response.items())
