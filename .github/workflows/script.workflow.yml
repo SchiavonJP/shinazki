@@ -1,7 +1,8 @@
 name: CI build
 
 on: 
-  schedule: [0 12 * * *] # this will be triggered on 12pm (UTC) each day 
+  schedule:
+    - cron: '0 12 * * *'  # this will be triggered on 12pm (UTC) each day 
 
 
 jobs:
