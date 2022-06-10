@@ -53,12 +53,9 @@ class Youtube:
             "client_x509_cert_url": settings.client_x509_cert_url,
         }
 
-        with open("aux.json", "w") as fp:
-            json.dump(cred, fp)
-
-        storage = Storage("%s-oauth.json" % self.api_name)
-        credentials = storage.get()
-
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+            cred, [settings.scope]
+        )
         if credentials is None or credentials.invalid:
             credentials = ServiceAccountCredentials.from_json_keyfile_dict(
                 cred, [settings.scope]
