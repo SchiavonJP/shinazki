@@ -60,8 +60,8 @@ class Youtube:
         credentials = storage.get()
 
         if credentials is None or credentials.invalid:
-            credentials = ServiceAccountCredentials.from_json_keyfile_name(
-                "aux.json", [settings.scope]
+            credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+                cred, [settings.scope]
             )
 
         return build(self.api_name, self.api_version, credentials=credentials)
