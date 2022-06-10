@@ -4,20 +4,27 @@ import os
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.client import flow_from_clientsecrets
+from oauth2client.service_account import ServiceAccountCredentials
 from oauth2client.file import Storage
 from oauth2client.tools import argparser, run_flow
 from pydantic import BaseModel
 import psycopg2
+import httplib2
 
 # Separar em um arquivo de configuração
 from dynaconf import Dynaconf
 
 settings = Dynaconf(settings_files=["./settings.toml", ".secrets.toml"])
 pyproject = Dynaconf(settings_files=["./pyproject.toml"])
-settings.client_id = os.environ["CLIENT_ID"]
-settings.client_secret = os.environ["CLIENT_SECRET"]
-settings.project_id = os.environ["PROJECT_ID"]
-settings.postgres_password = os.environ["POSTGRES_PASSWORD"]
+if not settings.IS_DEBUG:
+    settings.client_id = os.environ["CLIENT_ID"]
+    settings.client_secret = os.environ["CLIENT_SECRET"]
+    settings.project_id = os.environ["PROJECT_ID"]
+    settings.postgres_password = os.environ["POSTGRES_PASSWORD"]
+    settings.private_key_id = os.environ["PRIVATE_KEY_ID"]
+    settings.private_key = os.environ["PRIVATE_KEY"]
+    settings.client_email = os.environ["CLIENT_EMAIL"]
+    settings.client_x509_cert_url = os.environ["CLIENT_X509_CERT_URL"]
 
 
 class Music(BaseModel):
@@ -32,32 +39,30 @@ class Youtube:
 
     def get_authenticated_service(self):
         # Sim isso é uma gambiarra, mas é o que eu consegui fazer
-        c = {
-            "web": {
-                "client_id": settings.client_id,
-                "project_id": settings.project_id,
-                "auth_uri": settings.auth_uri,
-                "token_uri": settings.token_uri,
-                "auth_provider_x509_cert_url": settings.auth_provider_x509_cert_url,
-                "client_secret": settings.client_secret,
-                "redirect_uris": [settings.redirect_uris],
-                "javascript_origins": [settings.javascript_origins],
-            }
-        }
-        with open("aux.json", "w") as fp:
-            json.dump(c, fp)
-        flow = flow_from_clientsecrets(
-            "aux.json",
-            scope=[settings.scope],
-            message="Error loading client secret file: %s",
-        )
 
-        storage = Storage("%s-oauth2.json" % self.api_name)
+        cred = {
+            "type": "service_account",
+            "project_id": settings.project_id,
+            "private_key_id": settings.private_key_id,
+            "private_key": settings.private_key,
+            "client_email": settings.client_email,
+            "client_id": "",
+            "auth_uri": settings.auth_uri,
+            "token_uri": settings.token_uri,
+            "auth_provider_x509_cert_url": settings.auth_provider_x509_cert_url,
+            "client_x509_cert_url": settings.client_x509_cert_url,
+        }
+
+        with open("aux.json", "w") as fp:
+            json.dump(cred, fp)
+
+        storage = Storage("%s-oauth.json" % self.api_name)
         credentials = storage.get()
 
         if credentials is None or credentials.invalid:
-
-            credentials = run_flow(flow, storage)
+            credentials = ServiceAccountCredentials.from_json_keyfile_name(
+                "aux.json", [settings.scope]
+            )
 
         return build(self.api_name, self.api_version, credentials=credentials)
 
@@ -112,7 +117,7 @@ class Youtube:
             conn = psycopg2.connect(
                 host=settings.postgres_host,
                 database=settings.postgres_dbname,
-                user=settings.postrgres_user,
+                user=settings.postgres_user,
                 password=settings.postgres_password,
             )
             return conn
