@@ -22,7 +22,7 @@ if not settings.IS_DEBUG:
     settings.project_id = os.environ["PROJECT_ID"]
     settings.postgres_password = os.environ["POSTGRES_PASSWORD"]
     settings.private_key_id = os.environ["PRIVATE_KEY_ID"]
-    settings.private_key = os.environ["PRIVATE_KEY"]
+    settings.private_key = os.environ["PRIVATE_KEY"].replace("\\n", "\n")
     settings.client_email = os.environ["CLIENT_EMAIL"]
     settings.client_x509_cert_url = os.environ["CLIENT_X509_CERT_URL"]
 
