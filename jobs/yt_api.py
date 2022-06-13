@@ -17,14 +17,14 @@ from dynaconf import Dynaconf
 settings = Dynaconf(settings_files=["./settings.toml", ".secrets.toml"])
 pyproject = Dynaconf(settings_files=["./pyproject.toml"])
 if not settings.IS_DEBUG:
-    settings.client_id = os.environ["CLIENT_ID"]
-    settings.client_secret = os.environ["CLIENT_SECRET"]
-    settings.project_id = os.environ["PROJECT_ID"]
-    settings.postgres_password = os.environ["POSTGRES_PASSWORD"]
-    settings.private_key_id = os.environ["PRIVATE_KEY_ID"]
-    settings.private_key = os.environ["PRIVATE_KEY"].replace("\\n", "\n")
-    settings.client_email = os.environ["CLIENT_EMAIL"]
-    settings.client_x509_cert_url = os.environ["CLIENT_X509_CERT_URL"]
+    settings.client_id = os.environ.get("CLIENT_ID")
+    settings.client_secret = os.environ.get("CLIENT_SECRET")
+    settings.project_id = os.environ.get("PROJECT_ID")
+    settings.postgres_password = os.environ.get("POSTGRES_PASSWORD")
+    settings.private_key_id = os.environ.get("PRIVATE_KEY_ID")
+    settings.private_key = os.environ.get("PRIVATE_KEY").replace("\\n", "\n")
+    settings.client_email = os.environ.get("CLIENT_EMAIL")
+    settings.client_x509_cert_url = os.environ.get("CLIENT_X509_CERT_URL")
 
 
 class Music(BaseModel):
