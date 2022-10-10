@@ -127,7 +127,7 @@ class Youtube:
             for video in list_videos:
                 save_new_videos_sql = f"""
                         INSERT INTO music_videos 
-                        VALUES ('{video.videoId}', '{video.name.replace("'", "")}') 
+                        VALUES (default, '{video.videoId}', '{video.name.replace("'", "")}') 
                         ON CONFLICT DO NOTHING
                     """
                 cur = conn.cursor()
